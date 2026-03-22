@@ -1,0 +1,233 @@
+# ============================================
+# Python
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# ============================================
+# Virtual Environment
+# ============================================
+venv/
+env/
+.env/
+.venv/
+virtualenv/
+venv.bak/
+env.bak/
+
+# ============================================
+# IDE and Editor Files
+# ============================================
+# VS Code
+.vscode/
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+.idea_modules/
+.idea/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb
+
+# ============================================
+# Project Specific - Temporary Files
+# ============================================
+# Temporary uploads and generated files
+/temp/
+/tmp/
+*.tmp
+*.temp
+/temp_uploads/
+/uploads/
+*.cache
+
+# Generated PDF reports
+*.pdf
+!requirements.txt
+!README.md
+!*.md
+
+# Logs
+logs/
+*.log
+log.txt
+event_log.txt
+
+# ============================================
+# Dataset Files (Large files, sensitive data)
+# ============================================
+# Exclude all uploaded datasets
+data/uploads/
+*.pdf
+!generate_banashankari_pdf.py
+!banashankari_dataset_generator.py
+
+# CSV files (if you don't want to share raw data)
+*.csv
+!requirements.csv
+!sample_data_structure.csv
+
+# JSON files (exclude large data files)
+*.json
+!package.json
+!tsconfig.json
+!sample_config.json
+
+# ============================================
+# Machine Learning Models
+# ============================================
+# YOLO model files (large)
+*.pt
+*.pth
+*.onnx
+*.engine
+*.weights
+models/
+!models/__init__.py
+
+# Model cache
+~/.cache/ultralytics/
+~/.torch/
+
+# ============================================
+# System Files
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+~$*
+
+# ============================================
+# Environment Variables
+# ============================================
+.env
+.env.local
+.env.production
+.env.development
+secrets.py
+config/secrets.py
+
+# ============================================
+# Testing
+# ============================================
+test_output/
+test_results/
+coverage.xml
+.pytest_cache/
+htmlcov/
+.tox/
+
+# ============================================
+# Docker (if used)
+# ============================================
+docker-compose.override.yml
+docker-compose.local.yml
+*.dockerignore
+!Dockerfile
+!docker-compose.yml
+
+# ============================================
+# Backup Files
+# ============================================
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
+
+# ============================================
+# Database Files
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# ============================================
+# Archive Files
+# ============================================
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.bz2
+*.xz
+
+# ============================================
+# Custom Exclusions for Your Project
+# ============================================
+# Exclude generated Banashankari dataset
+banashankari_dataset/
+banashankari_dataset_generator.py
+Banashankari_Junction_Traffic_Report.pdf
+Free_Left_Turn_Analysis_Report_*.pdf
+
+# Exclude uploaded data
+data/uploads/
+uploads/
+temp_uploads/
+
+# Exclude analysis output
+analysis_output.json
+dashboard_results.json
+parsed_output.json
+test_results.json
+
+# Exclude Streamlit config
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# Exclude local configuration
+config.local.py
+local_settings.py
