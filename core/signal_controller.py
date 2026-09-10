@@ -226,3 +226,24 @@ class IntelligentSignalController:
     def get_events(self, limit: int = 50) -> List[Dict]:
         """Get recent events"""
         return self.event_log[-limit:]
+    # Add to signal_controller.py
+import smtplib
+import requests
+
+class AlertSystem:
+    def send_alert(self, violation_data):
+        # SMS Alert via Twilio
+        # Email Alert
+        # Dashboard Notification
+        
+        alerts = []
+        
+        # WhatsApp/SMS (using Twilio)
+        if violation_data['persistent']:
+            alerts.append(f"🚨 BLOCKING: {violation_data['vehicle_type']} blocking free-left lane for {violation_data['duration']}s")
+        
+        # Email to traffic control
+        if violation_data['critical']:
+            alerts.append(f"⚠️ CRITICAL: Immediate intervention needed at {violation_data['intersection']}")
+        
+        return alerts
