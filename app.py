@@ -22,7 +22,7 @@ import logging
 # Page config
 st.set_page_config(
     page_title="Intelligent Free Left Turn Management",
-    page_icon="🚦",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -119,7 +119,7 @@ def render_header():
     """Render main header"""
     st.markdown("""
     <div class="main-header">
-        <h1>🚦 Intelligent Free Left Turn Management System</h1>
+        <h1> Intelligent Free Left Turn Management System</h1>
         <p>AI-powered traffic management | Real-time monitoring | Dataset Analysis | Video Testing</p>
     </div>
     """, unsafe_allow_html=True)
@@ -128,10 +128,10 @@ def render_header():
 def render_camera_controls():
     """Render camera/video controls - FIXED: Shows video upload clearly"""
     """Render camera/video controls with lane configuration"""
-    st.subheader("📹 Source Selection")
+    st.subheader(" Source Selection")
     
     # ========== ADD LANE CONFIGURATION UI ==========
-    st.subheader("🎯 Free-Left Lane Configuration")
+    st.subheader(" Free-Left Lane Configuration")
     
     # Default lane coordinates (adjust based on typical video)
     col1, col2 = st.columns(2)
@@ -161,12 +161,9 @@ def render_camera_controls():
     # Store in session state
     if 'lane_region' not in st.session_state:
         st.session_state.lane_region = user_lane_region
-    # =============================================
-    
-    # Rest of your camera controls (tabs for camera/video)
     
     # Create tabs for different sources
-    tab1, tab2 = st.tabs(["📷 Live Camera", "🎬 Video File Upload"])
+    tab1, tab2 = st.tabs([" Live Camera", " Video File Upload"])
     
     source_info = None
     
@@ -187,12 +184,12 @@ def render_camera_controls():
             'source': camera_index
         }
         
-        st.success("✅ Camera selected. Click 'Start' below to begin.")
+        st.success(" Camera selected. Click 'Start' below to begin.")
     
     with tab2:
         st.markdown("### Video File Upload")
         st.markdown('<div class="video-upload-area">', unsafe_allow_html=True)
-        st.markdown("🎥 **Upload a pre-recorded video file**")
+        st.markdown(" **Upload a pre-recorded video file**")
         st.markdown("Supported formats: MP4, AVI, MOV, MKV, WEBM")
         
         uploaded_video = st.file_uploader(
@@ -234,10 +231,10 @@ def render_camera_controls():
                 'duration': duration
             }
             
-            st.success("✅ Video loaded successfully!")
+            st.success("Video loaded successfully!")
         else:
             st.info("📁 No video file selected. Upload a video to begin testing.")
-            st.markdown("💡 **Tip:** You can generate a test video using the provided script.")
+            st.markdown(" **Tip:** You can generate a test video using the provided script.")
         
         st.markdown('</div>', unsafe_allow_html=True)
     
@@ -246,7 +243,7 @@ def render_camera_controls():
     col1, col2 = st.columns(2)
     
     with col1:
-        if st.button("▶️ START", type="primary", use_container_width=True):
+        if st.button(" START", type="primary", use_container_width=True):
             if source_info:
                 if start_video_source(source_info):
                     st.rerun()
@@ -254,13 +251,13 @@ def render_camera_controls():
                 st.warning("Please select a source first (camera or video)")
     
     with col2:
-        if st.button("⏹️ STOP", use_container_width=True):
+        if st.button(" STOP", use_container_width=True):
             stop_video_source()
             st.rerun()
     
     # Show current status
     st.markdown("---")
-    st.subheader("📊 Status")
+    st.subheader(" Status")
     
     if st.session_state.app_state.camera_active:
         if st.session_state.app_state.video_source:
@@ -271,7 +268,7 @@ def render_camera_controls():
         else:
             st.success("✅ Source is active")
     else:
-        st.warning("⚠️ No active source - select camera or video and click START")
+        st.warning(" No active source - select camera or video and click START")
 
 
 def start_video_source(source_info):
@@ -327,7 +324,7 @@ def start_video_source(source_info):
         source_info_data = app.video_source.get_info()
         if source_info_data['type'] == 'video':
             st.success(f"✅ Video loaded: {source_info.get('name', 'video')}")
-            st.info(f"📹 Lane region configured: {lane_region}")
+            st.info(f" Lane region configured: {lane_region}")
         else:
             st.success("✅ Camera started successfully!")
         
@@ -357,7 +354,7 @@ def render_realtime_feed():
     app = st.session_state.app_state
     
     if not app.camera_active or not app.video_source:
-        st.info("📹 No active source. Select camera or upload video from the sidebar and click START.")
+        st.info(" No active source. Select camera or upload video from the sidebar and click START.")
         return
     
     # Read frame
@@ -430,7 +427,7 @@ def render_realtime_feed():
         
         with col2:
             if blocking:
-                st.error(f"🚨 {len(blocking)} vehicle(s) BLOCKING free-left lane!")
+                st.error(f" {len(blocking)} vehicle(s) BLOCKING free-left lane!")
                 for v in blocking[:3]:
                     st.write(f"• Vehicle {v['id'][:8]} - {v['duration']:.1f}s")
             else:
@@ -448,18 +445,18 @@ def render_realtime_feed():
 def render_sidebar():
     """Render sidebar controls"""
     with st.sidebar:
-        st.header("🎮 System Controls")
+        st.header(" System Controls")
         
         # Mode selection
         mode = st.radio(
             "Select Mode",
-            ["📊 Dataset Analysis", "📹 Real-time Camera/Video"],
+            [" Dataset Analysis", " Real-time Camera/Video"],
             help="Choose between analyzing uploaded datasets or real-time camera/video monitoring"
         )
         
         st.divider()
         
-        if mode == "📊 Dataset Analysis":
+        if mode == " Dataset Analysis":
             render_dataset_upload()
         else:
             render_camera_controls()
@@ -467,21 +464,21 @@ def render_sidebar():
         st.divider()
         
         # Manual override controls
-        st.subheader("🔧 Manual Override")
+        st.subheader(" Manual Override")
         col1, col2 = st.columns(2)
         with col1:
-            if st.button("🔒 Force Protected Left", type="primary", use_container_width=True):
+            if st.button(" Force Protected Left", type="primary", use_container_width=True):
                 st.session_state.app_state.controller.manual_protect()
                 st.success("Protected left activated")
         with col2:
-            if st.button("🔄 Reset to Auto", use_container_width=True):
+            if st.button(" Reset to Auto", use_container_width=True):
                 st.session_state.app_state.controller.manual_reset()
                 st.info("Auto mode restored")
         
         st.divider()
         
         # Configuration
-        st.subheader("⚙️ Detection Settings")
+        st.subheader(" Detection Settings")
         st.session_state.app_state.controller.config['violation_threshold'] = st.slider(
             "Violation Threshold", 1, 10, 
             st.session_state.app_state.controller.config['violation_threshold']
@@ -492,7 +489,7 @@ def render_sidebar():
 
 def render_dataset_upload():
     """Render dataset upload interface"""
-    st.subheader("📄 Upload Dataset")
+    st.subheader(" Upload Dataset")
     
     uploaded_file = st.file_uploader(
         "Upload Traffic Data PDF",
@@ -503,7 +500,7 @@ def render_dataset_upload():
     if uploaded_file is not None:
         st.info(f"📁 File loaded: {uploaded_file.name} ({uploaded_file.size / 1024:.1f} KB)")
         
-        if st.button("🔍 Analyze Dataset", type="primary", use_container_width=True):
+        if st.button(" Analyze Dataset", type="primary", use_container_width=True):
             with st.spinner("Analyzing dataset..."):
                 try:
                     temp_dir = tempfile.gettempdir()
@@ -545,7 +542,7 @@ def display_dataset_insights():
     """Display insights from analyzed dataset"""
     results = st.session_state.analysis_results
     
-    st.markdown("### 📊 Dataset Analysis Results")
+    st.markdown("###  Dataset Analysis Results")
     
     risk = results.get('risk_assessment', {})
     risk_level = risk.get('level', 'UNKNOWN')
@@ -573,7 +570,7 @@ def display_dataset_insights():
     
     recommendations = results.get('recommendations', [])
     if recommendations:
-        st.markdown("### 💡 Recommendations")
+        st.markdown("###  Recommendations")
         for rec in recommendations[:5]:
             st.info(rec)
 
@@ -581,7 +578,7 @@ def display_dataset_insights():
 def render_download_button(results: Dict, intersection_name: str):
     """Render download report button"""
     st.markdown("---")
-    st.subheader("📥 Download Analysis Report")
+    st.subheader(" Download Analysis Report")
     
     if st.button("📄 Generate & Download PDF Report", type="primary", use_container_width=True):
         with st.spinner("Generating report..."):
@@ -621,7 +618,7 @@ def render_signal_status():
     app = st.session_state.app_state
     state = app.controller.get_state()
     
-    st.subheader("🚥 Current Signal Status")
+    st.subheader(" Current Signal Status")
     
     phase = state.phase
     phase_color = "green" if "PROTECTED" in phase else "orange"
@@ -635,13 +632,13 @@ def render_signal_status():
     
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.metric("🚗 Blocking Vehicles", state.blocking_vehicles)
+        st.metric(" Blocking Vehicles", state.blocking_vehicles)
     with col2:
-        st.metric("⚠️ Violations", state.violations_detected)
+        st.metric(" Violations", state.violations_detected)
     with col3:
-        st.metric("⏱️ Cooldown", f"{state.cooldown_remaining:.0f}s")
+        st.metric(" Cooldown", f"{state.cooldown_remaining:.0f}s")
     with col4:
-        st.metric("📊 Risk Level", state.risk_level)
+        st.metric(" Risk Level", state.risk_level)
     
     if state.is_peak_hour:
         st.warning("⚠️ Peak Hour - Enhanced sensitivity")
@@ -651,7 +648,7 @@ def render_analytics():
     """Render analytics dashboard"""
     app = st.session_state.app_state
     
-    st.subheader("📊 System Analytics")
+    st.subheader(" System Analytics")
     
     col1, col2 = st.columns(2)
     
@@ -676,7 +673,7 @@ def render_analytics():
             fig.update_layout(title="Violations by Hour")
             st.plotly_chart(fig, use_container_width=True)
     
-    with st.expander("📋 Event Log"):
+    with st.expander(" Event Log"):
         for event in reversed(events[-20:]):
             st.write(f"**{event['timestamp'][:19]}** - {event['event']}")
 
@@ -704,7 +701,7 @@ def main():
     
     mode = render_sidebar()
     
-    if mode == "📊 Dataset Analysis":
+    if mode == " Dataset Analysis":
         col1, col2 = st.columns([2, 1])
         
         with col1:
@@ -731,7 +728,7 @@ def main():
         render_analytics()
     
     st.divider()
-    st.caption(f"🕒 Last updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} | System Status: Active")
+    st.caption(f" Last updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} | System Status: Active")
 
 
 if __name__ == "__main__":

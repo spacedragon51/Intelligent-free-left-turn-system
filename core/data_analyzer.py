@@ -130,30 +130,30 @@ class DataAnalyzer:
         risk_level = risk.get('level', 'MEDIUM')
         
         if risk_level == 'HIGH':
-            recommendations.append("🚨 IMMEDIATE: Implement protected left-turn signal during peak hours")
-            recommendations.append("📹 Deploy AI-based enforcement cameras at this intersection")
-            recommendations.append("🚧 Install physical channelizers to separate free-left lane")
+            recommendations.append(" IMMEDIATE: Implement protected left-turn signal during peak hours")
+            recommendations.append(" Deploy AI-based enforcement cameras at this intersection")
+            recommendations.append(" Install physical channelizers to separate free-left lane")
         elif risk_level == 'MEDIUM':
-            recommendations.append("⚠️ Schedule periodic protected left-turn interventions")
-            recommendations.append("📊 Monitor violation patterns for 2 weeks before permanent changes")
+            recommendations.append(" Schedule periodic protected left-turn interventions")
+            recommendations.append(" Monitor violation patterns for 2 weeks before permanent changes")
         
         # Peak hour recommendations
         peak_hours = violations.get('peak_hours', {})
         if peak_hours:
             peak_times = ', '.join([str(h) for h in peak_hours.keys()])
-            recommendations.append(f"🕐 Deploy traffic marshals during peak hours: {peak_times}")
+            recommendations.append(f" Deploy traffic marshals during peak hours: {peak_times}")
         
         # Vehicle-specific
         vehicle_dist = violations.get('vehicle_distribution', {})
         if any('motor' in str(v).lower() or 'bike' in str(v).lower() for v in vehicle_dist.keys()):
-            recommendations.append("🛵 Implement dedicated two-wheeler waiting zone")
+            recommendations.append(" Implement dedicated two-wheeler waiting zone")
         
         # Pedestrian safety
         if self.data.get('pedestrian_data'):
-            recommendations.append("🚶 Add pedestrian crossing signals with countdown timers")
+            recommendations.append(" Add pedestrian crossing signals with countdown timers")
         
         if not recommendations:
-            recommendations.append("✅ Current operations are within safe limits. Continue monitoring.")
+            recommendations.append(" Current operations are within safe limits. Continue monitoring.")
         
         return recommendations
     
